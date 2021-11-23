@@ -1,0 +1,45 @@
+---
+title: "code chunk demo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load_penguin_data, echo=TRUE, eval=TRUE}
+require(palmerpenguins)
+head(penguins)
+```
+
+```{r simple pairplot,fig.width=4,fig.asp=1}
+plot(penguins[,3:5])
+```
+
+# Tabset Example {.tabset}
+
+## Tab 1
+Tab 1 contents
+
+## Tab 2
+Tab 2 contents
+
+## Tab 3
+Tab 3 contents
+
+# Next Section
+Non-tabbed material
+
+# Different Penguin Plots {.tabset .tabset-pills}
+
+The following tabs contain different plot types
+
+## Histogram
+
+```{r flipper length histogram, fig.asp=1/1.5}
+hist(penguins$flipper_length_mm)
+```
+
+#fig.asp=aspect ratio 1 means 1:1 can be decimals or fraction
+#when echo is false it shows the figure but not the code
+#when evaluate is false it only shows the R code

@@ -1,0 +1,27 @@
+---
+title: "R Markdown Documents - Part 1"
+subtitle: "Analysis of Environmental Data"
+author: "Matt Fertakos"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+---
+#Introduction
+My name is **Matt Fertakos** and I am a PhD student in the *Organismic and Evolutionary Biology Program* at UMass Amherst.
+
+#Concept List
+1. R fundamentals
+1. Testing for significance in R
+1. Working with spatial data
+
+#Course List
+* Plant-insect interacions
+
+* Entomology
+
+* Plant systematics
+
+
+
