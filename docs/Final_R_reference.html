@@ -170,10 +170,28 @@ pre code {
 </div>
 
 
-<div id="r-reference-guide" class="section level1 tabset tabset-pills">
-<h1>R Reference Guide</h1>
+<div id="matts-r-reference-guide" class="section level1 tabset tabset-pills">
+<h1>Matt's R Reference Guide</h1>
 <div id="loading-data-and-packages" class="section level2">
 <h2>Loading Data and Packages</h2>
+<div id="loading-packages-library-and-require" class="section level3">
+<h3>Loading packages library() and require ()</h3>
+<p>The require() and library() functions load and attach packages to your current workspace.</p>
+<pre class="r"><code>#Various ways to attach packages
+require('palmerpenguins')</code></pre>
+<pre><code>## Loading required package: palmerpenguins</code></pre>
+<pre class="r"><code>library(palmerpenguins)
+require('here')</code></pre>
+<pre><code>## Loading required package: here</code></pre>
+<pre><code>## here() starts at /Users/Matt/Desktop/environmental_data</code></pre>
+<pre class="r"><code>library(here)</code></pre>
+</div>
+<div id="here" class="section level3">
+<h3>here()</h3>
+<p>The function here() finds your files from the working directory given a path you define. It makes it easier to navigate files contained within folders in your working directory.</p>
+<pre class="r"><code>##Load in data and save to an object
+ginkgo&lt;-read.csv(here(&quot;data&quot;,&quot;ginkgo_data_2021.csv&quot;))</code></pre>
+</div>
 </div>
 <div id="data-structures" class="section level2">
 <h2>Data Structures</h2>
@@ -181,22 +199,22 @@ pre code {
 <h3>c()</h3>
 <p>The function c() combines or concatenates its arguments into a vector (a 1-dimensional data structure consisting of 1 or more elements).</p>
 <p><em>All of the elements must be of the same type. </em>I can’t combine character and numeric types in the same call to c()</p>
-<pre class="r"><code>##Create a vector of numbers:
+<pre class="r"><code>##Create a vector of numbers
 num_vec  = c(1, 4, 8, 9, 13)
 
-##Create a vector of characters:
+##Create a vector of characters
 char_vec = c(&quot;a&quot;, &quot;fish&quot;, &quot;data is cool&quot;)</code></pre>
 </div>
 <div id="length" class="section level3">
 <h3>length()</h3>
 <p>The function length() extracts the length of a factor, vector, or list. It can also be used to define the length of an object from the first to whatever number you define.</p>
-<pre class="r"><code>##Create a vector of numbers:
+<pre class="r"><code>##Create a vector of numbers
 num_vec  = c(1, 4, 8, 9, 13, 15, 18, 20)
 
-##Get the length of the vector of numbers:
+##Get the length of the vector of numbers
 length(num_vec)</code></pre>
 <pre><code>## [1] 8</code></pre>
-<pre class="r"><code>##Define the length of the vector:
+<pre class="r"><code>##Define the length of the vector
 length(num_vec) &lt;- 4
 num_vec</code></pre>
 <pre><code>## [1] 1 4 8 9</code></pre>
@@ -204,7 +222,7 @@ num_vec</code></pre>
 <div id="matrix" class="section level3">
 <h3>matrix()</h3>
 <p>The function matrix() creates a matrix from the set of data you define. The number of rows and number of columns can be defined with the &quot;nrow&quot; and &quot;ncol&quot; arguments within the function.</p>
-<pre class="r"><code>##Create a vector of numbers:
+<pre class="r"><code>##Create a vector of numbers
 num_vec  = c(1, 4, 8, 9, 13,15,18,20)
 
 ##Create a matrix from the vector
@@ -218,7 +236,7 @@ matrix</code></pre>
 <div id="data.frame" class="section level3">
 <h3>data.frame()</h3>
 <p>The function data.frame() creates a data frame from the set of data you define. The argument row.names can be used to define the row to be used as column names, or set as NULL if there are no column names.</p>
-<pre class="r"><code>##Create a vector of numbers:
+<pre class="r"><code>##Create a vector of numbers
 num_vec  = c(1, 4, 8, 9, 13,15,18,20)
 
 ##Create a data frame from the vector and save it as object 'dataframe'
@@ -238,26 +256,122 @@ dataframe</code></pre>
 <div id="nrow" class="section level3">
 <h3>nrow ()</h3>
 <p>The nrow() function returns the number of rows in your object.</p>
-<pre class="r"><code>require('here')</code></pre>
-<pre><code>## Loading required package: here</code></pre>
-<pre><code>## here() starts at /Users/Matt/Desktop/environmental_data</code></pre>
-<pre class="r"><code>ginkgo&lt;-read.csv(here(&quot;data&quot;,&quot;ginkgo_data_2021.csv&quot;))
+<pre class="r"><code>##Load required packages
+require('here')
+##Load in data
+ginkgo&lt;-read.csv(here(&quot;data&quot;,&quot;ginkgo_data_2021.csv&quot;))
+##Count the number of rows in the data
 nrow(ginkgo)</code></pre>
 <pre><code>## [1] 756</code></pre>
 </div>
 <div id="ncol" class="section level3">
 <h3>ncol()</h3>
 <p>The ncol() function returns the number of columns in your object.</p>
-<pre class="r"><code>ginkgo&lt;-read.csv(here(&quot;data&quot;,&quot;ginkgo_data_2021.csv&quot;))
+<pre class="r"><code>##Load required packages
+require('here')
+##Load in the data
+ginkgo&lt;-read.csv(here(&quot;data&quot;,&quot;ginkgo_data_2021.csv&quot;))
+##Count the number of columns in the data
 ncol(ginkgo)</code></pre>
 <pre><code>## [1] 6</code></pre>
 </div>
 <div id="dim" class="section level3">
 <h3>dim()</h3>
+<p>The dim() function returns the dimensions of an object, or can be used to define the dimensions of an object. The first number in the dim() output is the number of rows, and the second number of the number of columns.</p>
+<pre class="r"><code>##Load required packages
+require('here')
+##Load in the data
+ginkgo&lt;-read.csv(here(&quot;data&quot;,&quot;ginkgo_data_2021.csv&quot;))
+##Get the dimensions of the data
+dim(ginkgo)</code></pre>
+<pre><code>## [1] 756   6</code></pre>
+<pre class="r"><code>##Redefine the dimensions of the data
+dim(ginkgo)&lt;-c(2,3)</code></pre>
 </div>
 </div>
 <div id="subsetting" class="section level2">
 <h2>Subsetting</h2>
+<div id="by-name" class="section level3">
+<h3>By name ($)</h3>
+<p>The $ subsets a data frame by the columns name.</p>
+<pre class="r"><code>#Pull out the column called &quot;max_width&quot;
+ginkgo$max_width</code></pre>
+<pre><code>## NULL</code></pre>
+</div>
+<div id="by-position" class="section level3">
+<h3>By position ([])</h3>
+<pre class="r"><code>#Select the first row of ginkgo data
+ginkgo[,1]</code></pre>
+<pre><code>##   [1]  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719
+##  [13]  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719
+##  [25]  7719  7719  7719  4847  4847  4847  4847  4847  4847  4847  4847  4847
+##  [37]  4847  4847  4847  4847  4847  4847  4847  4847  4847  4847  4847  4847
+##  [49]  4847  4847  4847  4847  4847  4874  4874  4874  4874  4874  4874  4874
+##  [61]  4874  4874  4874  4874  4874  4874  4874  4874  4874  4874  4873  4873
+##  [73]  4873  4873  4873  4873  4873  4873  4873  4873  7719  7719  7719  7719
+##  [85]  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719
+##  [97]  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  7719  9603
+## [109]  9603  9603  9603  9603  9603  9603  9603  9603  9603  9603  9603  9603
+## [121]  9603  9603  9603  3470  3470  3470  3470  3470  3470  3470  3470  3470
+## [133]  3470  3470  3470  3470  6719  6720  6722  6723  6725  6726  6727  6728
+## [145]  6729  6730  6731  6732 12669 12669 12669 12669 12669 12669 12669 12669
+## [157] 12669 12669 12669 12669 12669 12669 12669 12669 12669 12669 12669 12669
+## [169] 12669 12669 12669 12669 12669 12669  6721  6721  6721  6721  6721  6721
+## [181]  6721  6721  6721  6721  6721  6721  6721  6721  6721  6721  6721  6721
+## [193]  6718 12982 12982 12982 12982 12982 12982 12982 12982  3704  3704  3704
+## [205]  3704  3704  3704  3704  3704  3704  3704  3704  3704  3704  3704  3704
+## [217]  3704  3704  3704  3704  3704  3704  3704  3704  2183  2183  2183  2183
+## [229]  2183  2183  6071  6071  6071  6071  6071  6071  6071  6071  6071  6071
+## [241]  6071  6071  6071  6071  6071  6071  6071  6071  6071  6071  6071  6071
+## [253]  6071  6071  6071  6071  6071  6071  6071  3705  3705  3705  3705  3705
+## [265]  3705  3705  3705  3705  3705  3705  3705  3705  3705  3705  3705  3705
+## [277]  3705  3705  3705  3705  3705  3705  3705  3705  3705  3705  3705  6066
+## [289]  6066  6066  6066  6066  6066  3469  3469  3469  3469  3469  3469  3469
+## [301]  3469  3469  3469  3469  3469  3469  3469  3469  3469  2187  2187  2187
+## [313]  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187
+## [325]  2187  2187  2187  2187  2187  2187  2187  3703  3703  3703  3703  3703
+## [337]  3703  3703  3703  3703  3703  3703  3703  3703  3703  3703  3703  3703
+## [349]  3703  3703  3703  3703  3703  3703  3703  3703  3703  2188  2188  2188
+## [361]  2188  2188  2188  6067  4873  4873  4873  4873  7206  7206  7206  9603
+## [373]  9603  3470  6066  6066  3469  2188  2188  2188  2188  2188  7719  7719
+## [385]  6067  6067  6067  6067  6067  4874  4874  4874  4874  4874  4874  4874
+## [397]  4873  4873  4873  4873  4873  4873  4873  4873  4873  4873  4873  7719
+## [409]  7719  7206  7206  9603  9603  9603  9603  3470  3470  1896 12978 12978
+## [421] 12978 12978 12978  6066  6066  6066  6066  6066  3469  3469  2187  2188
+## [433]  2188  2188  2188  2188  7719  6067  6067  6067  6067  6067  6067  6067
+## [445]  4847  4874  4874  4873  4873  7719  7206  9603  3470  6724  1896 12669
+## [457]  7202  7202  7202  6721  6721  6721 12978 12978 12978 12978  6718  6718
+## [469]  6718  6718  6718 12982  3704  6066  2187  2187  2187  2188  2188  2188
+## [481]  2188  2188  6067  6067  6067  6067  6067  4847  4847  4873  4873  9603
+## [493]  3470  7202  6721  6721 12978 12978 12978 12978 12978 12978 12978  6718
+## [505]  6718  6718  3704  3705  6066  3469  3469  3469  3703  2188  2188  2188
+## [517]  2188  2188  2188  6067  6067  6067  4847  7206  9603  3470  3470  1896
+## [529]  1896  1896  1896  1896 12669 12669  6721  6721 12978 12978  6718  6718
+## [541]  6718  6066  6066  2188  2188  2188  6067  4874  4873  7206  9603  9603
+## [553]  3470  1896  1896  1896  7202  6721  6721  6721 12978 12978 12978  6718
+## [565]  6718  6718 12982  3704  6066  3469  2187  3703  6067  4874  7206  3470
+## [577]  3470  6721  6733  1896  1896 12669  7202  6721  6718  6718 12982  3705
+## [589]  6066  3469  3469  3469  3470  3470  7202  6718 12982 12982 12982 12982
+## [601] 12982  3704  3469  6067  6067  3470  3470  3470  6721 12982  6067  6067
+## [613]  6067  6067  7206  9603  6718 12982  2187  6067  4874  7206 12669  7202
+## [625]  7202 12978 12978  6718 12982  7206 12982 12982  6066  3469  2187  3703
+## [637]  3703  3470 12978 12982 12982 12982  7206 12982  4874 12978 12982  3469
+## [649]  7206  3470  2187 12978  6718  7202 12978  6066  2187 12978  6718  6718
+## [661]  2187 12978 12982 12982  3469  6718 12978  6718 12982 12982  9603  9603
+## [673]  6718  6718 12982 12982  6718 12982  6718  7206  7206  7206  7206  7206
+## [685]  7206  7206  7206  7206  7206  7206  7206  7206  7206  7206  7206  2187
+## [697]  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187
+## [709]  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187  2187  1896
+## [721]  1896  1896  1896  1896  1896  1896  1896  1896  1896  1896  1896  1896
+## [733]  1896  1896  1896  1896  1896  7202  7202  7202  7202  7202  7202  7202
+## [745]  7202  7202  7202  7202  7202  7202  7202  7202  7202  7202  7202  7202</code></pre>
+<pre class="r"><code>#Select the element in row 2, column 3
+
+#Select the 3rd column of the ginkgo data</code></pre>
+</div>
+<div id="subset" class="section level3">
+<h3>subset ()</h3>
+</div>
 </div>
 <div id="numerical-data-exploration" class="section level2">
 <h2>Numerical Data Exploration</h2>

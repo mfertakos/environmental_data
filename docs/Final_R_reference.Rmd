@@ -125,7 +125,7 @@ ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
 ##Get the dimensions of the data
 dim(ginkgo)
 ##Redefine the dimensions of the data
-dim(ginkgo)<-c(500,3)
+dim(ginkgo)<-c(2,3)
 ```
 
 
