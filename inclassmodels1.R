@@ -24,4 +24,7 @@ t.test(dat_ade_male$body_mass_g,alternative="greater",mu=4000)
 #Q6
 #two sample because its males and females not just 1 at a time
 t.test(body_mass_g ~ sex,data=dat_ade)
-       
+
+#Q8
+t.test(body_mass_g ~ sex,data=dat_ade,alternative="g")
+t.test(body_mass_g ~ sex,data=dat_ade,alternative="l")

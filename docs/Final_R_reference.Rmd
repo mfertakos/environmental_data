@@ -1,0 +1,161 @@
+---
+title: "Final Project: R Reference"
+author: "Matt Fertakos"
+date: "12/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Reference Guide {.tabset .tabset-pills}
+
+
+## Loading Data and Packages
+### Loading packages library() and require ()
+The require() and library() functions load and attach packages to your current workspace. 
+
+```{r}
+#Various ways to attach packages
+require('palmerpenguins')
+library(palmerpenguins)
+require('here')
+library(here)
+```
+
+### here()
+The function here() finds your files from the working directory given a path you define. It makes it easier to navigate files contained within folders in your working directory.
+
+```{r}
+##Load in data and save to an object
+ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
+```
+
+## Data Structures
+
+### c()
+The function c() combines or concatenates its arguments into a vector (a 1-dimensional data structure consisting of 1 or more elements).
+
+*All of the elements must be of the same type.
+*I can’t combine character and numeric types in the same call to c()
+
+```{r}
+##Create a vector of numbers
+num_vec  = c(1, 4, 8, 9, 13)
+
+##Create a vector of characters
+char_vec = c("a", "fish", "data is cool")
+```
+
+### length()
+The function length() extracts the length of a factor, vector, or list. It can also be used to define the length of an object from the first to whatever number you define.
+
+```{r}
+##Create a vector of numbers
+num_vec  = c(1, 4, 8, 9, 13, 15, 18, 20)
+
+##Get the length of the vector of numbers
+length(num_vec)
+
+##Define the length of the vector
+length(num_vec) <- 4
+num_vec
+```
+
+### matrix()
+The function matrix() creates a matrix from the set of data you define. The number of rows and number of columns can be defined with the "nrow" and "ncol" arguments within the function.
+```{r}
+##Create a vector of numbers
+num_vec  = c(1, 4, 8, 9, 13,15,18,20)
+
+##Create a matrix from the vector
+matrix = matrix(num_vec, nrow=2, ncol=4)
+
+matrix
+```
+
+### data.frame()
+The function data.frame() creates a data frame from the set of data you define. The argument row.names can be used to define the row to be used as column names, or set as NULL if there are no column names.
+
+```{r}
+##Create a vector of numbers
+num_vec  = c(1, 4, 8, 9, 13,15,18,20)
+
+##Create a data frame from the vector and save it as object 'dataframe'
+dataframe = data.frame(num_vec,row.names=NULL)
+
+dataframe
+
+```
+
+### nrow ()
+The nrow() function returns the number of rows in your object.
+
+```{r}
+##Load required packages
+require('here')
+##Load in data
+ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
+##Count the number of rows in the data
+nrow(ginkgo)
+
+```
+
+
+### ncol()
+The ncol() function returns the number of columns in your object.
+```{r}
+##Load required packages
+require('here')
+##Load in the data
+ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
+##Count the number of columns in the data
+ncol(ginkgo)
+```
+
+### dim()
+The dim() function returns the dimensions of an object, or can be used to define the dimensions of an object. The first number in the dim() output is the number of rows, and the second number of the number of columns.
+
+```{r}
+##Load required packages
+require('here')
+##Load in the data
+ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
+##Get the dimensions of the data
+dim(ginkgo)
+##Redefine the dimensions of the data
+dim(ginkgo)<-c(500,3)
+```
+
+
+## Subsetting
+### By name ($)
+The $ subsets a data frame by the columns name.
+```{r}
+#Pull out the column called "max_width"
+ginkgo$max_width
+```
+### By position ([])
+```{r}
+#Select the first row of ginkgo data
+ginkgo[,1]
+
+#Select the element in row 2, column 3
+
+#Select the 3rd column of the ginkgo data
+```
+
+### subset ()
+
+
+## Numerical Data Exploration
+
+
+## Graphical Data Exploration
+
+
+## Distribution Functions
+
+
+...

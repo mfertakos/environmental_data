@@ -38,15 +38,16 @@ fit_additive = lm(body_mass_g ~ sex + species, data = penguins)
 #two-way interactive ANOVA
 fit_interactive = lm(body_mass_g ~ sex*species,data=penguins)
 
-#Question 1 (should this be + instead of *?)
+#Question 1
 boxplot(formula = body_mass_g ~ sex*species,data=penguins,ylab="body mass (g)",names=c("female \n Adelie","male \n Adelie","female \n Chinstrap","male \n Chinstrap","female \n Gentoo","male \n Gentoo"),las=2,xlab="",main="boxplot of body mass as explained by sex and species")
 
 #Question 2
-#Based on the boxplots, I think that male Gentoo penguins are significantly heavier than female Gentoos, while the other two species are not sgnificantly different.
+#Based on the boxplots, I think that male Gentoo penguins are significantly heavier than female Gentoos, while the other two species are not significantly different.
 #I believe this because of the distance between the median weights of male and female Gentoos are far apart, and the minimum male weight is still higher than the median female weight.
 
 #Question 3 (finish)
-#I think adding sex to the model of species will improve the fit. If you compare the boxplot created with only species and the one created with species and sex as predictors, you can see that 
+#I think adding sex to the model of species will improve the fit. If you compare the boxplot created with only species and the one created with species and sex as predictors, you can see that
+#level of variation is similar between the boxes in the just species box plot so sex might add more variation
 
 #Question 4
 fit_both = lm(body_mass_g ~ sex*species, data = penguins)
@@ -61,8 +62,6 @@ fit_both = lm(body_mass_g ~ sex*species, data = penguins)
 #3368.84+(1)158.37=3527.21g
 
 #Question 8
-aggregate(
-  x = penguins$body_mass_g,
-  by = list(penguins$species), 
+aggregate(body_mass_g ~ sex*species, data = penguins,
   FUN = "mean",na.rm=TRUE)
-#=3733.088
+#=3527.206
