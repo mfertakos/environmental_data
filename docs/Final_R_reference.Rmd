@@ -18,9 +18,9 @@ The require() and library() functions load and attach packages to your current w
 
 ```{r}
 #Various ways to attach packages
-require('palmerpenguins')
+require(palmerpenguins)
 library(palmerpenguins)
-require('here')
+require(here)
 library(here)
 ```
 
@@ -94,9 +94,9 @@ The nrow() function returns the number of rows in your object.
 
 ```{r}
 ##Load required packages
-require('here')
+#require('here')
 ##Load in data
-ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
+#ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
 ##Count the number of rows in the data
 nrow(ginkgo)
 
@@ -107,9 +107,9 @@ nrow(ginkgo)
 The ncol() function returns the number of columns in your object.
 ```{r}
 ##Load required packages
-require('here')
+#require('here')
 ##Load in the data
-ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
+#ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
 ##Count the number of columns in the data
 ncol(ginkgo)
 ```
@@ -118,14 +118,11 @@ ncol(ginkgo)
 The dim() function returns the dimensions of an object, or can be used to define the dimensions of an object. The first number in the dim() output is the number of rows, and the second number of the number of columns.
 
 ```{r}
-##Load required packages
-require('here')
-##Load in the data
-ginkgo<-read.csv(here("data","ginkgo_data_2021.csv"))
 ##Get the dimensions of the data
 dim(ginkgo)
 ##Redefine the dimensions of the data
-dim(ginkgo)<-c(2,3)
+#Below is not run in Rmd file to maintain data structure
+#dim(ginkgo)<-c(2,3)
 ```
 
 
@@ -133,29 +130,157 @@ dim(ginkgo)<-c(2,3)
 ### By name ($)
 The $ subsets a data frame by the columns name.
 ```{r}
-#Pull out the column called "max_width"
+##Pull out the column called "max_width"
 ginkgo$max_width
 ```
-### By position ([])
+
+### By position ([ ])
+Square brackets are used following an object to subset by position.
 ```{r}
-#Select the first row of ginkgo data
+##Select the first row of ginkgo data
 ginkgo[,1]
 
-#Select the element in row 2, column 3
+##Select the element in row 2, column 3
+ginkgo[2,3]
 
-#Select the 3rd column of the ginkgo data
+##Select the 3rd column of the ginkgo data
+ginkgo[,3]
 ```
 
 ### subset ()
-
+The subset() function returns a portion of a vector, matrix, or data frame based on the conditions you provide.
+```{r}
+##retrieve all the data for Adelie penguins (in the species column) from the peuguins dataset
+subset(penguins, species = "Adelie")
+```
 
 ## Numerical Data Exploration
+### summary()
+The summary() function outputs a variety of statistics calculated using the object, or subset of the object inputted. 
 
+```{r}
+summary(ginkgo$petiole_length)
+```
+
+### mean ()
+The mean() function finds the average (mean) of the data within an object, or a subset of the object.
+```{r}
+##find the mean petiole length in the ginkgo dataset (remove NAs)
+mean(ginkgo$petiole_length,na.rm=TRUE)
+```
+
+### sd()
+The sd() function finds the standard deviation of the data within an object, or a subset of the object.
+
+```{r}
+##find the standard deviation of petiole length in the ginkgo dataset (remove NAs)
+sd(ginkgo$petiole_length,na.rm = TRUE)
+```
 
 ## Graphical Data Exploration
+### plot()
+The plot() function creates a scatterplot of two variables (x and y) in a dataset. The arguments that can be included are:
 
+  * col=
+    + change the color of what is plotted
+  * pch=
+    + change the symbol plotted
+  * cex=
+    + change the plotted text size relative to the base size (1)
+  * main=
+    + create a title for the plot
+  * xlab=
+    + create a title for the x-axis
+  * ylab=
+    + create a title for the y-axis
+  * xlim=
+    + set the limits of the x-axis
+  * ylim=
+    + set the limits of the y-axis
+    
+```{r}
+## Create scatterplot, with x and y axes limited to 120
+plot(x=ginkgo$max_depth,y=ginkgo$max_width,col="red",pch=3, cex= 0.75, main="ginkgo leaf max width as explained by max depth",xlab="maximum depth (mm)",ylab="maximum width (mm)",xlim=c(0,120),ylim=c(0,120))
+```
+
+### hist()
+The hist() function creates a histogram of an inputed variable.
+  *The "breaks=" argument creates the number of bars in the graph. It should be noted that inputting a single number here is taken as a suggestion only.
+
+
+```{r}
+## Create a histogram of penguin flipper lengths with 4 bars.
+hist(penguins$flipper_length_mm,breaks=4,main="histogram of penguin flipper length",xlab="flipper length (mm)")
+```
+
+### boxplot()
+The boxplot() function creates a box-and-whisker plot of an inputted dataset, or subset of a dataset.
+
+```{r}
+##Create a simple boxplot of ginkgo petiole lengths
+boxplot(ginkgo$petiole_length)
+##Create a conditional boxplot of petiole lengths conditioned by if seeds are present
+boxplot(petiole_length~seeds_present,data=ginkgo,ylab="petiole length (mm)",xlab="seeds present",main="boxplot of ginkgo petiole length based on seed presence")
+```
+
+### par()
+The par() function is used to specificy the dimensions of a multi graphic figure.
+
+```{r}
+##define dimensions of plots included
+par(mfrow=c(2,2))
+##plot
+hist(penguins$flipper_length_mm,breaks=4,main="histogram of penguin flipper length",xlab="flipper length (mm)")
+plot(x=ginkgo$max_depth,y=ginkgo$notch_depth,col="blue",pch=2, cex= 0.75, main="ginkgo leaf notch depth \n as explained by max depth",xlab="maximum depth (mm)",ylab="notch depth (mm)",xlim=c(0,120),ylim=c(0,120))
+boxplot(petiole_length~seeds_present,data=ginkgo,ylab="petiole length (mm)",xlab="seeds present",main="boxplot of ginkgo petiole length \n based on seed presence")
+plot(x=ginkgo$max_depth,y=ginkgo$max_width,col="red",pch=3, cex= 0.75, main="ginkgo leaf max width \n as explained by max depth",xlab="maximum depth (mm)",ylab="maximum width (mm)",xlim=c(0,120),ylim=c(0,120))
+```
 
 ## Distribution Functions
+### dnorm()
+The dnorm() function returns a value of the probability density function for the normal distribution based on a specific value (x), as well as mean (mean), and standard deviation (sd) values inputted. This is otherwise known as the probability an event occurs.
 
+```{r}
+##Find the value of the standard normal distribution with a mean of 0 and standard deviation of 1 at x=2.
+dnorm(x=2,mean=0,sd=1)
+```
 
-...
+### pnorm()
+The pnorm() function returns the value of the cumulative density function with inputs q, mean, and sd. The output is equivalent to a %. Result would be the same as adding up all the outputs of dnorm() individually for different x values.
+
+```{r}
+##Find the percentage of females shorter than 60 inches in a population with mean = 65 and standard deviation = 2
+pnorm(q=65,mean=65,sd=2)
+```
+
+### qnorm()
+The qnorm() function, otherwise known as the quantile function, is the inverse of the pnorm() function. It is used to determine the Z-score of the xth quantile of the normal distribution. Uses % (like 75% quantile) to determine the actual value where that quantile lies in the distribution.
+
+```{r}
+##What is the 99th quantile of a normal distribution (aka Z score)?
+qnorm(0.99,mean=0,sd=1)
+```
+
+### dbinom()
+The dbinom() function returns the value of the probability density function for a binomally distributed dataset. Arguments inputed include x, size, and prob. Output is the probability an event occurs in a binomally distributed dataset.
+
+```{r}
+##What is the probability of 8 successes during 15 trials where the probability of success on each trial is 0.8?
+dbinom(x=8,size=15,prob=0.8)
+```
+
+### pbinom()
+The pbinom() function returns the value of the cumulative density function with inputs q, size, and prob of a binomally distributed dataset. The output is equivalent to a %. Result would be the same as adding up all the outputs of dbinom() individually for different x values.
+
+```{r}
+##What is the probability of getting less than 10 successes in 20 trials where the probability of success on each trial is 75%?
+pbinom(q=10,size=20,p=0.75)
+```
+
+### qbinom()
+The qbinom() function, otherwise known as the quantile function, is the inverse of the pbinom() function. It is used to determine the Z-score of the xth quantile of the binomial distribution. Uses % (like 75% quantile) to determine the actual value where that quantile lies in the distribution.
+
+```{r}
+##What is the 75th quantile of a binomial distribution with 50 trials and probability of success on each trial of 60%?
+qbinom(0.75,size=50,prob=0.60)
+```
