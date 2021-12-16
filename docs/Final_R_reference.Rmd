@@ -24,8 +24,8 @@ require(here)
 library(here)
 ```
 
-### here()
-The function here() finds your files from the working directory given a path you define. It makes it easier to navigate files contained within folders in your working directory.
+### here() and read.csv()
+The function here() finds your files from the working directory given a path you define. It makes it easier to navigate files contained within folders in your working directory. The read.csv() function reads the csv file specified by the path created using the here() function and creates a data frame from it.
 
 ```{r}
 ##Load in data and save to an object

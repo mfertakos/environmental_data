@@ -186,9 +186,9 @@ require(here)</code></pre>
 <pre><code>## here() starts at /Users/Matt/Desktop/environmental_data</code></pre>
 <pre class="r"><code>library(here)</code></pre>
 </div>
-<div id="here" class="section level3">
-<h3>here()</h3>
-<p>The function here() finds your files from the working directory given a path you define. It makes it easier to navigate files contained within folders in your working directory.</p>
+<div id="here-and-read.csv" class="section level3">
+<h3>here() and read.csv()</h3>
+<p>The function here() finds your files from the working directory given a path you define. It makes it easier to navigate files contained within folders in your working directory. The read.csv() function reads the csv file specified by the path created using the here() function and creates a data frame from it.</p>
 <pre class="r"><code>##Load in data and save to an object
 ginkgo&lt;-read.csv(here(&quot;data&quot;,&quot;ginkgo_data_2021.csv&quot;))</code></pre>
 </div>
